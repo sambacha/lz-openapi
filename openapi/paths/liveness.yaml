@@ -1,0 +1,9 @@
+get:
+  operationId: LivenessController_check
+  summary: Liveness check
+  parameters: []
+  responses:
+    '200':
+      description: ''
+  tags:
+    - liveness check

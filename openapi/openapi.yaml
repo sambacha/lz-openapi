@@ -1,0 +1,25 @@
+openapi: 3.0.0
+info:
+  title: Gateway LayerZero API
+  description: Tannhauser Gateway LayerZero API
+  version: 1.0.0
+  contact: {}
+tags: []
+servers: []
+components:
+  securitySchemes:
+    bearer:
+      scheme: bearer
+      bearerFormat: JWT
+      type: http
+paths:
+  /auth/login:
+    $ref: paths/auth@login.yaml
+  /transactions:
+    $ref: paths/transactions.yaml
+  /transactions/count:
+    $ref: paths/transactions@count.yaml
+  /readiness:
+    $ref: paths/readiness.yaml
+  /liveness:
+    $ref: paths/liveness.yaml

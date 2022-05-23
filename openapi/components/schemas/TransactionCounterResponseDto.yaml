@@ -1,0 +1,7 @@
+type: object
+properties:
+  counter:
+    type: number
+    example: 42
+required:
+  - counter

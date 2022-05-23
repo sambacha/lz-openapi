@@ -1,0 +1,21 @@
+type: object
+properties:
+  transfer:
+    $ref: ./TransferDto.yaml
+  gatewayAddress:
+    $ref: ./GatewayAddressDto.yaml
+  filAddress:
+    type: string
+    example: t1cfxqaivmpcv2rxdd2ew75u5duyabpkri2f6lddy
+  amount:
+    type: number
+    example: '0.01'
+  ethTxHash:
+    type: string
+    example: '0xf5dbaf357e09abf2d4151974bdfae5e20317043b155ff653b03fbd137c940a84'
+required:
+  - transfer
+  - gatewayAddress
+  - filAddress
+  - amount
+  - ethTxHash

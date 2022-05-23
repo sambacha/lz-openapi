@@ -1,0 +1,19 @@
+post:
+  operationId: AuthController_login
+  summary: Login
+  parameters: []
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/AuthDto.yaml
+  responses:
+    '201':
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/AuthResponseDto.yaml
+  tags:
+    - auth

@@ -1,0 +1,57 @@
+post:
+  operationId: TransactionsController_createTransaction
+  summary: Create a transaction
+  parameters: []
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/TransactionCreateDto.yaml
+  responses:
+    '201':
+      description: ''
+      content:
+        application/json:
+          schema:
+            type: object
+  tags:
+    - transactions
+  security:
+    - bearer: []
+put:
+  operationId: TransactionsController_updateTransaction
+  summary: Update a transaction
+  parameters: []
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/TransactionUpdateDto.yaml
+  responses:
+    '200':
+      description: ''
+      content:
+        application/json:
+          schema:
+            type: object
+  tags:
+    - transactions
+  security:
+    - bearer: []
+get:
+  operationId: TransactionsController_getTransaction
+  summary: Get a transaction
+  parameters: []
+  responses:
+    '200':
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/TransactionResponseDto.yaml
+  tags:
+    - transactions
+  security:
+    - bearer: []

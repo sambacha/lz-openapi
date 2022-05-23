@@ -1,0 +1,23 @@
+get:
+  operationId: TransactionsController_getTransactionsCount
+  summary: Get transactions count
+  parameters:
+    - name: status
+      required: false
+      in: query
+      schema:
+        enum:
+          - pending
+          - confirmed
+          - canceled
+          - error
+        type: string
+  responses:
+    '200':
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/TransactionCounterResponseDto.yaml
+  tags:
+    - transactions

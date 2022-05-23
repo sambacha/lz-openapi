@@ -1,0 +1,8 @@
+type: object
+properties:
+  signature:
+    type: string
+    example: >-
+      0x94bf8475ea508b148b3a6df470fbe7460ce8fac2c611e197bcdc56a7da4783f50132dcf71c306a4098d7333fa4d59fbcf31be976d72574a1c8288285d455f4491b
+required:
+  - signature

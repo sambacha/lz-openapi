@@ -1,0 +1,15 @@
+type: object
+properties:
+  status:
+    type: string
+    example: confirmed
+  ethTxHash:
+    type: string
+    example: '0xf5dbaf357e09abf2d4151974bdfae5e20317043b155ff653b03fbd137c940a84'
+  message:
+    type: string
+    example: Unhandled rejection
+required:
+  - status
+  - ethTxHash
+  - message

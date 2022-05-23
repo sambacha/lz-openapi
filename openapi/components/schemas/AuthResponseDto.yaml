@@ -1,0 +1,8 @@
+type: object
+properties:
+  access_token:
+    type: string
+    example: >-
+      eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZGRyZXNzIjoiMHg5ZDgyYTZjOTgxMTE0OTQzYmQ0MmI5ZTMzOTM2MWFmYjgyYjUwNTk2IiwiaWF0IjoxNjAzMzU4Nzk2LCJleHAiOjE2MDM5NjM1OTZ9.BzHFBvadgYlS8y43gX0VjbPmKLRuQOYm0oMdO2o3F-Y
+required:
+  - access_token

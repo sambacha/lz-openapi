@@ -1,0 +1,11 @@
+type: object
+properties:
+  address:
+    type: string
+    example: t1cfxqaivmpcv2rxdd2ew75u5duyabpkri2f6lddy
+  params:
+    type: string
+    example: bFdWUU9MbWVXdWtSaW1HbV9hNVhzZWlFY1R1NDEyTloxRUpYQ2Y3bm1PWQ==
+required:
+  - address
+  - params

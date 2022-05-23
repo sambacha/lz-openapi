@@ -1,0 +1,539 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Gateway LayerZero API",
+        "description": "Tannhauser Gateway LayerZero API",
+        "version": "1.0.0",
+        "contact": {}
+    },
+    "tags": [],
+    "servers": [],
+    "components": {
+        "securitySchemes": {
+            "bearer": {
+                "scheme": "bearer",
+                "bearerFormat": "JWT",
+                "type": "http"
+            }
+        },
+        "schemas": {
+            "AuthDto": {
+                "type": "object",
+                "properties": {
+                    "signature": {
+                        "type": "string",
+                        "example": "0x94bf8475ea508b148b3a6df470fbe7460ce8fac2c611e197bcdc56a7da4783f50132dcf71c306a4098d7333fa4d59fbcf31be976d72574a1c8288285d455f4491b"
+                    }
+                },
+                "required": [
+                    "signature"
+                ]
+            },
+            "AuthResponseDto": {
+                "type": "object",
+                "properties": {
+                    "access_token": {
+                        "type": "string",
+                        "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZGRyZXNzIjoiMHg5ZDgyYTZjOTgxMTE0OTQzYmQ0MmI5ZTMzOTM2MWFmYjgyYjUwNTk2IiwiaWF0IjoxNjAzMzU4Nzk2LCJleHAiOjE2MDM5NjM1OTZ9.BzHFBvadgYlS8y43gX0VjbPmKLRuQOYm0oMdO2o3F-Y"
+                    }
+                },
+                "required": [
+                    "access_token"
+                ]
+            },
+            "TransferDto": {
+                "type": "object",
+                "properties": {
+                    "ethAddress": {
+                        "type": "string",
+                        "example": "0x9d82a6c981114943bd42b9e339361afb82b50596"
+                    },
+                    "asset": {
+                        "type": "string",
+                        "example": "FIL"
+                    },
+                    "to": {
+                        "type": "string",
+                        "example": "ETH"
+                    },
+                    "nonce": {
+                        "type": "string",
+                        "example": "0x2f485473ae47edb4d6fe4144f00dd0860555db21bd3a9ce4222f17f08069106d"
+                    }
+                },
+                "required": [
+                    "ethAddress",
+                    "asset",
+                    "to",
+                    "nonce"
+                ]
+            },
+            "GatewayAddressDto": {
+                "type": "object",
+                "properties": {
+                    "address": {
+                        "type": "string",
+                        "example": "t1cfxqaivmpcv2rxdd2ew75u5duyabpkri2f6lddy"
+                    },
+                    "params": {
+                        "type": "string",
+                        "example": "bFdWUU9MbWVXdWtSaW1HbV9hNVhzZWlFY1R1NDEyTloxRUpYQ2Y3bm1PWQ=="
+                    }
+                },
+                "required": [
+                    "address",
+                    "params"
+                ]
+            },
+            "TransactionCreateDto": {
+                "type": "object",
+                "properties": {
+                    "transfer": {
+                        "$ref": "#/components/schemas/TransferDto"
+                    },
+                    "gatewayAddress": {
+                        "$ref": "#/components/schemas/GatewayAddressDto"
+                    },
+                    "filAddress": {
+                        "type": "string",
+                        "example": "t1cfxqaivmpcv2rxdd2ew75u5duyabpkri2f6lddy"
+                    },
+                    "amount": {
+                        "type": "number",
+                        "example": "0.01"
+                    },
+                    "ethTxHash": {
+                        "type": "string",
+                        "example": "0xf5dbaf357e09abf2d4151974bdfae5e20317043b155ff653b03fbd137c940a84"
+                    }
+                },
+                "required": [
+                    "transfer",
+                    "gatewayAddress",
+                    "filAddress",
+                    "amount",
+                    "ethTxHash"
+                ]
+            },
+            "TransactionUpdateDto": {
+                "type": "object",
+                "properties": {
+                    "status": {
+                        "type": "string",
+                        "example": "confirmed"
+                    },
+                    "ethTxHash": {
+                        "type": "string",
+                        "example": "0xf5dbaf357e09abf2d4151974bdfae5e20317043b155ff653b03fbd137c940a84"
+                    },
+                    "message": {
+                        "type": "string",
+                        "example": "Unhandled rejection"
+                    }
+                },
+                "required": [
+                    "status",
+                    "ethTxHash",
+                    "message"
+                ]
+            },
+            "TransactionResponseDto": {
+                "type": "object",
+                "properties": {
+                    "createdAt": {
+                        "format": "date-time",
+                        "type": "string",
+                        "example": "2020-10-16T20:48:18.476Z"
+                    },
+                    "address": {
+                        "type": "string",
+                        "example": "0x9d82a6c981114943bd42b9e339361afb82b50596"
+                    },
+                    "type": {
+                        "type": "string",
+                        "example": "deposit"
+                    },
+                    "status": {
+                        "type": "string",
+                        "example": "pending"
+                    },
+                    "transfer": {
+                        "$ref": "#/components/schemas/TransferDto"
+                    },
+                    "filAddress": {
+                        "type": "string",
+                        "example": "t1cfxqaivmpcv2rxdd2ew75u5duyabpkri2f6lddy"
+                    },
+                    "amount": {
+                        "type": "number",
+                        "example": "0.01"
+                    },
+                    "ethTxHash": {
+                        "type": "string",
+                        "example": "0xf5dbaf357e09abf2d4151974bdfae5e20317043b155ff653b03fbd137c940a84"
+                    }
+                },
+                "required": [
+                    "createdAt",
+                    "address",
+                    "type",
+                    "status",
+                    "transfer",
+                    "filAddress",
+                    "amount",
+                    "ethTxHash"
+                ]
+            },
+            "TransactionCounterResponseDto": {
+                "type": "object",
+                "properties": {
+                    "counter": {
+                        "type": "number",
+                        "example": 42
+                    }
+                },
+                "required": [
+                    "counter"
+                ]
+            }
+        }
+    },
+    "paths": {
+        "/auth/login": {
+            "post": {
+                "operationId": "AuthController_login",
+                "summary": "Login",
+                "parameters": [],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/AuthDto"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AuthResponseDto"
+                                }
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "auth"
+                ]
+            }
+        },
+        "/transactions": {
+            "post": {
+                "operationId": "TransactionsController_createTransaction",
+                "summary": "Create a transaction",
+                "parameters": [],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/TransactionCreateDto"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "transactions"
+                ],
+                "security": [{
+                    "bearer": []
+                }]
+            },
+            "put": {
+                "operationId": "TransactionsController_updateTransaction",
+                "summary": "Update a transaction",
+                "parameters": [],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/TransactionUpdateDto"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "transactions"
+                ],
+                "security": [{
+                    "bearer": []
+                }]
+            },
+            "get": {
+                "operationId": "TransactionsController_getTransaction",
+                "summary": "Get a transaction",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/TransactionResponseDto"
+                                }
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "transactions"
+                ],
+                "security": [{
+                    "bearer": []
+                }]
+            }
+        },
+        "/transactions/count": {
+            "get": {
+                "operationId": "TransactionsController_getTransactionsCount",
+                "summary": "Get transactions count",
+                "parameters": [{
+                    "name": "status",
+                    "required": false,
+                    "in": "query",
+                    "schema": {
+                        "enum": [
+                            "pending",
+                            "confirmed",
+                            "canceled",
+                            "error"
+                        ],
+                        "type": "string"
+                    }
+                }],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/TransactionCounterResponseDto"
+                                }
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "transactions"
+                ]
+            }
+        },
+        "/readiness": {
+            "get": {
+                "operationId": "ReadinessController_check",
+                "summary": "Readiness check",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "The Health Check is successful",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "status": {
+                                            "type": "string",
+                                            "example": "ok"
+                                        },
+                                        "info": {
+                                            "type": "object",
+                                            "example": {
+                                                "database": {
+                                                    "status": "up"
+                                                }
+                                            },
+                                            "additionalProperties": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "status": {
+                                                        "type": "string"
+                                                    }
+                                                },
+                                                "additionalProperties": {
+                                                    "type": "string"
+                                                }
+                                            },
+                                            "nullable": true
+                                        },
+                                        "error": {
+                                            "type": "object",
+                                            "example": {},
+                                            "additionalProperties": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "status": {
+                                                        "type": "string"
+                                                    }
+                                                },
+                                                "additionalProperties": {
+                                                    "type": "string"
+                                                }
+                                            },
+                                            "nullable": true
+                                        },
+                                        "details": {
+                                            "type": "object",
+                                            "example": {
+                                                "database": {
+                                                    "status": "up"
+                                                }
+                                            },
+                                            "additionalProperties": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "status": {
+                                                        "type": "string"
+                                                    }
+                                                },
+                                                "additionalProperties": {
+                                                    "type": "string"
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "503": {
+                        "description": "The Health Check is not successful",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "status": {
+                                            "type": "string",
+                                            "example": "error"
+                                        },
+                                        "info": {
+                                            "type": "object",
+                                            "example": {
+                                                "database": {
+                                                    "status": "up"
+                                                }
+                                            },
+                                            "additionalProperties": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "status": {
+                                                        "type": "string"
+                                                    }
+                                                },
+                                                "additionalProperties": {
+                                                    "type": "string"
+                                                }
+                                            },
+                                            "nullable": true
+                                        },
+                                        "error": {
+                                            "type": "object",
+                                            "example": {
+                                                "redis": {
+                                                    "status": "down",
+                                                    "message": "Could not connect"
+                                                }
+                                            },
+                                            "additionalProperties": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "status": {
+                                                        "type": "string"
+                                                    }
+                                                },
+                                                "additionalProperties": {
+                                                    "type": "string"
+                                                }
+                                            },
+                                            "nullable": true
+                                        },
+                                        "details": {
+                                            "type": "object",
+                                            "example": {
+                                                "database": {
+                                                    "status": "up"
+                                                },
+                                                "redis": {
+                                                    "status": "down",
+                                                    "message": "Could not connect"
+                                                }
+                                            },
+                                            "additionalProperties": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "status": {
+                                                        "type": "string"
+                                                    }
+                                                },
+                                                "additionalProperties": {
+                                                    "type": "string"
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "health check"
+                ]
+            }
+        },
+        "/liveness": {
+            "get": {
+                "operationId": "LivenessController_check",
+                "summary": "Liveness check",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": ""
+                    }
+                },
+                "tags": [
+                    "liveness check"
+                ]
+            }
+        }
+    }
+}

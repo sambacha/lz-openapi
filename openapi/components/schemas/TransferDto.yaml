@@ -1,0 +1,19 @@
+type: object
+properties:
+  ethAddress:
+    type: string
+    example: '0x9d82a6c981114943bd42b9e339361afb82b50596'
+  asset:
+    type: string
+    example: FIL
+  to:
+    type: string
+    example: ETH
+  nonce:
+    type: string
+    example: '0x2f485473ae47edb4d6fe4144f00dd0860555db21bd3a9ce4222f17f08069106d'
+required:
+  - ethAddress
+  - asset
+  - to
+  - nonce

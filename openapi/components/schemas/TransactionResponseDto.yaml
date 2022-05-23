@@ -1,0 +1,35 @@
+type: object
+properties:
+  createdAt:
+    format: date-time
+    type: string
+    example: '2020-10-16T20:48:18.476Z'
+  address:
+    type: string
+    example: '0x9d82a6c981114943bd42b9e339361afb82b50596'
+  type:
+    type: string
+    example: deposit
+  status:
+    type: string
+    example: pending
+  transfer:
+    $ref: ./TransferDto.yaml
+  filAddress:
+    type: string
+    example: t1cfxqaivmpcv2rxdd2ew75u5duyabpkri2f6lddy
+  amount:
+    type: number
+    example: '0.01'
+  ethTxHash:
+    type: string
+    example: '0xf5dbaf357e09abf2d4151974bdfae5e20317043b155ff653b03fbd137c940a84'
+required:
+  - createdAt
+  - address
+  - type
+  - status
+  - transfer
+  - filAddress
+  - amount
+  - ethTxHash

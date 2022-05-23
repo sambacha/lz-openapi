@@ -1,3 +1,11 @@
 # Dir for bundles
+.DS_Store
 dist
 node_modules
+*.log
+*.tar.gz
+*.zip
+cache/
+.coverage/
+
+

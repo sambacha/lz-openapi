@@ -1,0 +1,41 @@
+name: CI
+
+on:
+  push:
+    branches-ignore:
+      - master
+    paths-ignore:
+      - .github/**
+  # manual trigger
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Clone source code
+        uses: actions/checkout@v2
+        with:
+          submodules: recursive
+
+      - name: Setup Node
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14.x'
+
+      - name: Cache dependencies
+        uses: actions/cache@v2
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+      - name: Install Dependencies
+        id: install
+        run: |
+          yarn install --frozen-lockfile
+      - name: Build
+        id: build
+        run: |
+          yarn run build

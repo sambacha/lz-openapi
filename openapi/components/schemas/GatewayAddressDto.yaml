@@ -2,10 +2,10 @@ type: object
 properties:
   address:
     type: string
-    example: t1cfxqaivmpcv2rxdd2ew75u5duyabpkri2f6lddy
+    example: relay.bond
   params:
     type: string
-    example: bFdWUU9MbWVXdWtSaW1HbV9hNVhzZWlFY1R1NDEyTloxRUpYQ2Y3bm1PWQ==
+    example: 0x000000F2869469220b6c2EdFF2d685bd5e74f784==
 required:
   - address
   - params

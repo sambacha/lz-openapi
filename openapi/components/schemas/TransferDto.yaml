@@ -2,16 +2,16 @@ type: object
 properties:
   ethAddress:
     type: string
-    example: '0x9d82a6c981114943bd42b9e339361afb82b50596'
+    example: '0x000000618E8ea9DcA789ba7978fE67CdD76Efaf0'
   asset:
     type: string
-    example: FIL
+    example: FOLD
   to:
     type: string
     example: ETH
   nonce:
     type: string
-    example: '0x2f485473ae47edb4d6fe4144f00dd0860555db21bd3a9ce4222f17f08069106d'
+    example: '0xd2549e0a95762fcc2b8a1bbf9bd081c12a8e6e783d1dad238d95cad26a65ee46af'
 required:
   - ethAddress
   - asset

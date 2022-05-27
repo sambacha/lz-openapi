@@ -4,18 +4,18 @@ properties:
     $ref: ./TransferDto.yaml
   gatewayAddress:
     $ref: ./GatewayAddressDto.yaml
-  filAddress:
+  namespace:
     type: string
-    example: t1cfxqaivmpcv2rxdd2ew75u5duyabpkri2f6lddy
+    example: relay.bond
   amount:
     type: number
     example: '0.01'
   ethTxHash:
     type: string
-    example: '0xf5dbaf357e09abf2d4151974bdfae5e20317043b155ff653b03fbd137c940a84'
+    example: '0xafda5e4205b21292df4faa6a70e989a05438d67c8890b35c5d0c765c4a4ad734'
 required:
   - transfer
   - gatewayAddress
-  - filAddress
+  - namespace
   - amount
   - ethTxHash

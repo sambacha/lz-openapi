@@ -34,7 +34,7 @@
         "properties": {
           "access_token": {
             "type": "string",
-            "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZGRyZXNzIjoiMHg5ZDgyYTZjOTgxMTE0OTQzYmQ0MmI5ZTMzOTM2MWFmYjgyYjUwNTk2IiwiaWF0IjoxNjAzMzU4Nzk2LCJleHAiOjE2MDM5NjM1OTZ9.BzHFBvadgYlS8y43gX0VjbPmKLRuQOYm0oMdO2o3F-Y"
+            "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c"
           }
         },
         "required": [
@@ -46,11 +46,11 @@
         "properties": {
           "ethAddress": {
             "type": "string",
-            "example": "0x9d82a6c981114943bd42b9e339361afb82b50596"
+            "example": "0x000000618E8ea9DcA789ba7978fE67CdD76Efaf0"
           },
           "asset": {
             "type": "string",
-            "example": "FIL"
+            "example": "FOLD"
           },
           "to": {
             "type": "string",
@@ -58,7 +58,7 @@
           },
           "nonce": {
             "type": "string",
-            "example": "0x2f485473ae47edb4d6fe4144f00dd0860555db21bd3a9ce4222f17f08069106d"
+            "example": "0xd2549e0a95762fcc2b8a1bbf9bd081c12a8e6e783d1dad238d95cad26a65ee46af"
           }
         },
         "required": [
@@ -73,11 +73,11 @@
         "properties": {
           "address": {
             "type": "string",
-            "example": "t1cfxqaivmpcv2rxdd2ew75u5duyabpkri2f6lddy"
+            "example": "relay.bond"
           },
           "params": {
             "type": "string",
-            "example": "bFdWUU9MbWVXdWtSaW1HbV9hNVhzZWlFY1R1NDEyTloxRUpYQ2Y3bm1PWQ=="
+            "example": "0x000000F2869469220b6c2EdFF2d685bd5e74f784=="
           }
         },
         "required": [
@@ -94,9 +94,9 @@
           "gatewayAddress": {
             "$ref": "#/components/schemas/GatewayAddressDto"
           },
-          "filAddress": {
+          "namespace": {
             "type": "string",
-            "example": "t1cfxqaivmpcv2rxdd2ew75u5duyabpkri2f6lddy"
+            "example": "relay.bond"
           },
           "amount": {
             "type": "number",
@@ -104,13 +104,13 @@
           },
           "ethTxHash": {
             "type": "string",
-            "example": "0xf5dbaf357e09abf2d4151974bdfae5e20317043b155ff653b03fbd137c940a84"
+            "example": "0xafda5e4205b21292df4faa6a70e989a05438d67c8890b35c5d0c765c4a4ad734"
           }
         },
         "required": [
           "transfer",
           "gatewayAddress",
-          "filAddress",
+          "namespace",
           "amount",
           "ethTxHash"
         ]
@@ -124,7 +124,7 @@
           },
           "ethTxHash": {
             "type": "string",
-            "example": "0xf5dbaf357e09abf2d4151974bdfae5e20317043b155ff653b03fbd137c940a84"
+            "example": "0xafda5e4205b21292df4faa6a70e989a05438d67c8890b35c5d0c765c4a4ad734"
           },
           "message": {
             "type": "string",
@@ -147,7 +147,7 @@
           },
           "address": {
             "type": "string",
-            "example": "0x9d82a6c981114943bd42b9e339361afb82b50596"
+            "example": "0x000000618E8ea9DcA789ba7978fE67CdD76Efaf0"
           },
           "type": {
             "type": "string",
@@ -160,9 +160,9 @@
           "transfer": {
             "$ref": "#/components/schemas/TransferDto"
           },
-          "filAddress": {
+          "namespace": {
             "type": "string",
-            "example": "t1cfxqaivmpcv2rxdd2ew75u5duyabpkri2f6lddy"
+            "example": "relay.bond"
           },
           "amount": {
             "type": "number",
@@ -170,7 +170,7 @@
           },
           "ethTxHash": {
             "type": "string",
-            "example": "0xf5dbaf357e09abf2d4151974bdfae5e20317043b155ff653b03fbd137c940a84"
+            "example": "0xafda5e4205b21292df4faa6a70e989a05438d67c8890b35c5d0c765c4a4ad734"
           }
         },
         "required": [
@@ -179,7 +179,7 @@
           "type",
           "status",
           "transfer",
-          "filAddress",
+          "namespace",
           "amount",
           "ethTxHash"
         ]

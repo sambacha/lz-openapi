@@ -1,0 +1,1271 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Gateway LayerZero API",
+    "description": "Tannhauser Gateway LayerZero API",
+    "version": "1.0.0",
+    "contact": {}
+  },
+  "tags": [],
+  "servers": [],
+  "components": {
+    "schemas": {
+      "AuthDto": {
+        "type": "object",
+        "properties": {
+          "signature": {
+            "type": "string",
+            "example": "0x94bf8475ea508b148b3a6df470fbe7460ce8fac2c611e197bcdc56a7da4783f50132dcf71c306a4098d7333fa4d59fbcf31be976d72574a1c8288285d455f4491b"
+          }
+        },
+        "required": [
+          "signature"
+        ]
+      },
+      "AuthResponseDto": {
+        "type": "object",
+        "properties": {
+          "access_token": {
+            "type": "string",
+            "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c"
+          }
+        },
+        "required": [
+          "access_token"
+        ]
+      },
+      "TransferDto": {
+        "type": "object",
+        "properties": {
+          "ethAddress": {
+            "type": "string",
+            "example": "0x000000618E8ea9DcA789ba7978fE67CdD76Efaf0"
+          },
+          "asset": {
+            "type": "string",
+            "example": "FOLD"
+          },
+          "to": {
+            "type": "string",
+            "example": "ETH"
+          },
+          "nonce": {
+            "type": "string",
+            "example": "0xd2549e0a95762fcc2b8a1bbf9bd081c12a8e6e783d1dad238d95cad26a65ee46af"
+          }
+        },
+        "required": [
+          "ethAddress",
+          "asset",
+          "to",
+          "nonce"
+        ]
+      },
+      "GatewayAddressDto": {
+        "type": "object",
+        "properties": {
+          "address": {
+            "type": "string",
+            "example": "relay.bond"
+          },
+          "params": {
+            "type": "string",
+            "example": "0x000000F2869469220b6c2EdFF2d685bd5e74f784=="
+          }
+        },
+        "required": [
+          "address",
+          "params"
+        ]
+      },
+      "TransactionCreateDto": {
+        "type": "object",
+        "properties": {
+          "transfer": {
+            "$ref": "#/components/schemas/TransferDto"
+          },
+          "gatewayAddress": {
+            "$ref": "#/components/schemas/GatewayAddressDto"
+          },
+          "namespace": {
+            "type": "string",
+            "example": "relay.bond"
+          },
+          "amount": {
+            "type": "number",
+            "example": "0.01"
+          },
+          "ethTxHash": {
+            "type": "string",
+            "example": "0xafda5e4205b21292df4faa6a70e989a05438d67c8890b35c5d0c765c4a4ad734"
+          }
+        },
+        "required": [
+          "transfer",
+          "gatewayAddress",
+          "namespace",
+          "amount",
+          "ethTxHash"
+        ]
+      },
+      "TransactionUpdateDto": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "example": "confirmed"
+          },
+          "ethTxHash": {
+            "type": "string",
+            "example": "0xafda5e4205b21292df4faa6a70e989a05438d67c8890b35c5d0c765c4a4ad734"
+          },
+          "message": {
+            "type": "string",
+            "example": "Unhandled rejection"
+          }
+        },
+        "required": [
+          "status",
+          "ethTxHash",
+          "message"
+        ]
+      },
+      "TransactionResponseDto": {
+        "type": "object",
+        "properties": {
+          "createdAt": {
+            "format": "date-time",
+            "type": "string",
+            "example": "2020-10-16T20:48:18.476Z"
+          },
+          "address": {
+            "type": "string",
+            "example": "0x000000618E8ea9DcA789ba7978fE67CdD76Efaf0"
+          },
+          "type": {
+            "type": "string",
+            "example": "deposit"
+          },
+          "status": {
+            "type": "string",
+            "example": "pending"
+          },
+          "transfer": {
+            "$ref": "#/components/schemas/TransferDto"
+          },
+          "namespace": {
+            "type": "string",
+            "example": "relay.bond"
+          },
+          "amount": {
+            "type": "number",
+            "example": "0.01"
+          },
+          "ethTxHash": {
+            "type": "string",
+            "example": "0xafda5e4205b21292df4faa6a70e989a05438d67c8890b35c5d0c765c4a4ad734"
+          }
+        },
+        "required": [
+          "createdAt",
+          "address",
+          "type",
+          "status",
+          "transfer",
+          "namespace",
+          "amount",
+          "ethTxHash"
+        ]
+      },
+      "TransactionCounterResponseDto": {
+        "type": "object",
+        "properties": {
+          "counter": {
+            "type": "number",
+            "example": 42
+          }
+        },
+        "required": [
+          "counter"
+        ]
+      }
+    },
+  "ApproveSpenderResponseDto": {
+    "type": "object",
+    "properties": {
+      "address": {
+        "type": "string",
+        "description": "We need to approve your token to this address"
+      }
+    },
+    "required": [
+      "address"
+    ]
+  },
+  "ApproveCalldataResponseDto": {
+    "type": "object",
+    "properties": {
+      "data": {
+        "type": "string",
+        "description": "CallData to sign"
+      },
+      "gasPrice": {
+        "type": "string",
+        "description": "Network fast gas price"
+      },
+      "to": {
+        "type": "string",
+        "description": "Address of the token to approve",
+        "example": "0x0000b2063AFE5e5d06cA890088990040007D5f7d"
+      },
+      "value": {
+        "type": "string",
+        "description": "ETH value in wei (for approve is 0)"
+      }
+    },
+    "required": [
+      "data",
+      "gasPrice",
+      "to",
+      "value"
+    ]
+  },
+  "TokenDto": {
+    "type": "object",
+    "properties": {
+      "address": {
+        "type": "string"
+      },
+      "symbol": {
+        "type": "string"
+      },
+      "name": {
+        "type": "string"
+      },
+      "decimals": {
+        "type": "number"
+      },
+      "logoURI": {
+        "type": "string"
+      }
+    },
+    "required": [
+      "address",
+      "symbol",
+      "name",
+      "decimals",
+      "logoURI"
+    ]
+  },
+  "PathViewDto": {
+    "type": "object",
+    "properties": {
+      "name": {
+        "type": "string"
+      },
+      "part": {
+        "type": "number"
+      },
+      "fromTokenAddress": {
+        "type": "string"
+      },
+      "toTokenAddress": {
+        "type": "string"
+      }
+    },
+    "required": [
+      "name",
+      "part",
+      "fromTokenAddress",
+      "toTokenAddress"
+    ]
+  },
+  "QuoteResponseDto": {
+    "type": "object",
+    "properties": {
+      "fromToken": {
+        "description": "Source token info",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/TokenDto"
+          }
+        ]
+      },
+      "toToken": {
+        "description": "Destination token info",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/TokenDto"
+          }
+        ]
+      },
+      "toTokenAmount": {
+        "type": "string",
+        "description": "Expected amount of destination token"
+      },
+      "fromTokenAmount": {
+        "type": "string",
+        "description": "Amount of source token"
+      },
+      "protocols": {
+        "description": "Selected protocols in a path",
+        "type": "array",
+        "items": {
+          "$ref": "#/components/schemas/PathViewDto"
+        }
+      },
+      "estimatedGas": {
+        "type": "number"
+      }
+    },
+    "required": [
+      "fromToken",
+      "toToken",
+      "toTokenAmount",
+      "fromTokenAmount",
+      "protocols",
+      "estimatedGas"
+    ]
+  },
+  "Tx": {
+    "type": "object",
+    "properties": {
+      "from": {
+        "type": "string"
+      },
+      "to": {
+        "type": "string"
+      },
+      "data": {
+        "type": "string"
+      },
+      "value": {
+        "type": "string"
+      },
+      "gasPrice": {
+        "type": "string"
+      },
+      "gas": {
+        "type": "string"
+      }
+    },
+    "required": [
+      "from",
+      "to",
+      "data",
+      "value",
+      "gasPrice",
+      "gas"
+    ]
+  },
+  "SwapResponseDto": {
+    "type": "object",
+    "properties": {
+      "fromToken": {
+        "description": "Source token info",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/TokenDto"
+          }
+        ]
+      },
+      "toToken": {
+        "description": "Destination token info",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/TokenDto"
+          }
+        ]
+      },
+      "toTokenAmount": {
+        "type": "string",
+        "description": "Expected amount of destination token"
+      },
+      "fromTokenAmount": {
+        "type": "string",
+        "description": "Amount of source token"
+      },
+      "protocols": {
+        "description": "Selected protocols in a path",
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      },
+      "tx": {
+        "description": "Transaction object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Tx"
+          }
+        ]
+      }
+    },
+    "required": [
+      "fromToken",
+      "toToken",
+      "toTokenAmount",
+      "fromTokenAmount",
+      "protocols",
+      "tx"
+    ]
+  },
+  "ProtocolsResponseDto": {
+    "type": "object",
+    "properties": {
+      "protocols": {
+        "description": "Supported protocols to pass to protocols",
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      }
+    },
+    "required": [
+      "protocols"
+    ]
+  },
+  "FullyQualifiedProtocolDto": {
+    "type": "object",
+    "properties": {
+      "id": {
+        "type": "string",
+        "description": "Protocol id"
+      },
+      "title": {
+        "type": "string",
+        "description": "Protocol title"
+      },
+      "img": {
+        "type": "string",
+        "description": "Protocol image"
+      }
+    },
+    "required": [
+      "id",
+      "title",
+      "img"
+    ]
+  },
+  "FullyQualifiedProtocolssResponseDto": {
+    "type": "object",
+    "properties": {
+      "protocols": {
+        "description": "Protocols public",
+        "type": "array",
+        "items": {
+          "$ref": "#/components/schemas/FullyQualifiedProtocolDto"
+        }
+      }
+    },
+    "required": [
+      "protocols"
+    ]
+  },
+  "TokensResponseDto": {
+    "type": "object",
+    "properties": {
+      "tokens": {
+        "type": "object",
+        "description": "Supported tokens",
+        "items": {
+          "type": "object",
+          "items": {
+            "type": "TokenDto"
+          }
+        }
+      }
+    },
+    "required": [
+      "tokens"
+    ]
+  },
+  "paths": {
+    "/auth/login": {
+      "post": {
+        "operationId": "AuthController_login",
+        "summary": "Login",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AuthDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AuthResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "auth"
+        ]
+      }
+    },
+    "/transactions": {
+      "post": {
+        "operationId": "TransactionsController_createTransaction",
+        "summary": "Create a transaction",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TransactionCreateDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "transactions"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      },
+      "put": {
+        "operationId": "TransactionsController_updateTransaction",
+        "summary": "Update a transaction",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TransactionUpdateDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "transactions"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      },
+      "get": {
+        "operationId": "TransactionsController_getTransaction",
+        "summary": "Get a transaction",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TransactionResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "transactions"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/transactions/count": {
+      "get": {
+        "operationId": "TransactionsController_getTransactionsCount",
+        "summary": "Get transactions count",
+        "parameters": [
+          {
+            "name": "status",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "enum": [
+                "pending",
+                "confirmed",
+                "canceled",
+                "error"
+              ],
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TransactionCounterResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "transactions"
+        ]
+      }
+    },
+    "/readiness": {
+      "get": {
+        "operationId": "ReadinessController_check",
+        "summary": "Readiness check",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "The Health Check is successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "ok"
+                    },
+                    "info": {
+                      "type": "object",
+                      "example": {
+                        "database": {
+                          "status": "up"
+                        }
+                      },
+                      "additionalProperties": {
+                        "type": "object",
+                        "properties": {
+                          "status": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": {
+                          "type": "string"
+                        }
+                      },
+                      "nullable": true
+                    },
+                    "error": {
+                      "type": "object",
+                      "example": {},
+                      "additionalProperties": {
+                        "type": "object",
+                        "properties": {
+                          "status": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": {
+                          "type": "string"
+                        }
+                      },
+                      "nullable": true
+                    },
+                    "details": {
+                      "type": "object",
+                      "example": {
+                        "database": {
+                          "status": "up"
+                        }
+                      },
+                      "additionalProperties": {
+                        "type": "object",
+                        "properties": {
+                          "status": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "The Health Check is not successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "error"
+                    },
+                    "info": {
+                      "type": "object",
+                      "example": {
+                        "database": {
+                          "status": "up"
+                        }
+                      },
+                      "additionalProperties": {
+                        "type": "object",
+                        "properties": {
+                          "status": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": {
+                          "type": "string"
+                        }
+                      },
+                      "nullable": true
+                    },
+                    "error": {
+                      "type": "object",
+                      "example": {
+                        "redis": {
+                          "status": "down",
+                          "message": "Could not connect"
+                        }
+                      },
+                      "additionalProperties": {
+                        "type": "object",
+                        "properties": {
+                          "status": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": {
+                          "type": "string"
+                        }
+                      },
+                      "nullable": true
+                    },
+                    "details": {
+                      "type": "object",
+                      "example": {
+                        "database": {
+                          "status": "up"
+                        },
+                        "redis": {
+                          "status": "down",
+                          "message": "Could not connect"
+                        }
+                      },
+                      "additionalProperties": {
+                        "type": "object",
+                        "properties": {
+                          "status": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "health check"
+        ]
+      }
+    },
+    "/liveness": {
+      "get": {
+        "operationId": "LivenessController_check",
+        "summary": "Liveness check",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "liveness check"
+        ]
+      }
+    }
+  },
+  "/approve/spender": {
+    "get": {
+      "operationId": "PermissiveActionLink_getSpender",
+      "parameters": [],
+      "responses": {
+        "200": {
+          "description": "Address of spender",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ApproveSpenderResponseDto"
+              }
+            }
+          }
+        }
+      },
+      "tags": [
+        "Approve"
+      ]
+    }
+  },
+  "/approve/calldata": {
+    "get": {
+      "operationId": "PermissiveActionLink_getCallData",
+      "parameters": [
+        {
+          "name": "tokenAddress",
+          "required": true,
+          "in": "query",
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "amount",
+          "required": false,
+          "in": "query",
+          "description": "if not set use infinity approve",
+          "schema": {
+            "type": "string"
+          }
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "Generated approve calldata",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ApproveCalldataResponseDto"
+              }
+            }
+          }
+        }
+      },
+      "tags": [
+        "Approve"
+      ]
+    }
+  },
+  "/quote": {
+    "get": {
+      "operationId": "Switchboard_getQuote",
+      "parameters": [
+        {
+          "name": "fromTokenAddress",
+          "required": true,
+          "in": "query",
+          "description": "",
+          "example": "0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE",
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "toTokenAddress",
+          "required": true,
+          "in": "query",
+          "description": "",
+          "example": "0x0000003568D82BDE01De5Ba740719da6eCa1c8cE",
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "amount",
+          "required": true,
+          "in": "query",
+          "description": "",
+          "example": "10000000000000000",
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "protocols",
+          "required": false,
+          "in": "query",
+          "description": "default: all",
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "fee",
+          "required": false,
+          "in": "query",
+          "description": "Ethereum: min: 0; max: 3; LayerZero/Stargate: min: 0; max: 3; default: 0;  approximate of swap",
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "gasPrice",
+          "required": false,
+          "in": "query",
+          "description": "default: confidence: 99, 95",
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "gasLimit",
+          "required": false,
+          "in": "query",
+          "description": "",
+          "schema": {}
+        },
+        {
+          "name": "connectorTokens",
+          "required": false,
+          "in": "query",
+          "description": "max: 5; approximate of swap",
+          "allowEmptyValue": true,
+          "schema": {}
+        },
+        {
+          "name": "complexityLevel",
+          "required": false,
+          "in": "query",
+          "description": "min: 0; max: 3; default: 2; approximate of swap",
+          "schema": {}
+        },
+        {
+          "name": "mainRouteParts",
+          "required": false,
+          "in": "query",
+          "description": "default: Ethereum: 10, LayerZero/Stargate: 10; max: Ethereum: 50, LayerZero/Stargate: 50 approximate of swap",
+          "schema": {}
+        },
+        {
+          "name": "virtualParts",
+          "required": false,
+          "in": "query",
+          "description": "virtual split parts. default: 50; max: 500; approximate of swap",
+          "schema": {}
+        },
+        {
+          "name": "parts",
+          "required": false,
+          "in": "query",
+          "description": "split parts. default: Ethereum: 50; LayerZero/Stargate: 40 max: Ethereum: 100; LayerZero/Stargate: 100; approximate of swap",
+          "schema": {}
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "Quote",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/QuoteResponseDto"
+              }
+            }
+          }
+        }
+      },
+      "tags": [
+        "Swap"
+      ]
+    }
+  },
+  "/swap": {
+    "get": {
+      "operationId": "Switchboard_getSwap",
+      "parameters": [
+        {
+          "name": "fromTokenAddress",
+          "required": true,
+          "in": "query",
+          "description": "",
+          "example": "0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE",
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "toTokenAddress",
+          "required": true,
+          "in": "query",
+          "description": "",
+          "example": "0x0000003568D82BDE01De5Ba740719da6eCa1c8cE",
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "amount",
+          "required": true,
+          "in": "query",
+          "description": "",
+          "example": "10000000000000000",
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "fromAddress",
+          "required": true,
+          "in": "query",
+          "description": "The address that calls the 1inch contract",
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "slippage",
+          "required": true,
+          "in": "query",
+          "description": "min: 0; max: 50;",
+          "example": 1,
+          "schema": {
+            "type": "number"
+          }
+        },
+        {
+          "name": "protocols",
+          "required": false,
+          "in": "query",
+          "description": "default: all",
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "destReceiver",
+          "required": false,
+          "in": "query",
+          "description": "Receiver of destination asset. default: fromAddress",
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "referrerAddress",
+          "required": false,
+          "in": "query",
+          "description": "",
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "fee",
+          "required": false,
+          "in": "query",
+          "description": "Ethereum: min: 0; max: 3; LayerZero/Stargate: min: 0; max: 3; default: 0;  approximate of swap",
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "gasPrice",
+          "required": false,
+          "in": "query",
+          "description": "default: confidence: 99, 95",
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "disableEstimate",
+          "required": false,
+          "in": "query",
+          "description": "",
+          "schema": {
+            "type": "boolean"
+          }
+        },
+        {
+          "name": "burnLz",
+          "required": false,
+          "in": "query",
+          "description": "default: false; Suggest to check user's balance and allowance before set this flag; CHI should be approved to spender address",
+          "schema": {
+            "type": "boolean"
+          }
+        },
+        {
+          "name": "allowPartialFill",
+          "required": false,
+          "in": "query",
+          "description": "",
+          "schema": {
+            "type": "boolean"
+          }
+        },
+        {
+          "name": "virtualParts",
+          "required": false,
+          "in": "query",
+          "description": "virtual split parts. default: 50; max: 500; approximate of swap",
+          "schema": {}
+        },
+        {
+          "name": "parts",
+          "required": false,
+          "in": "query",
+          "description": "split parts. default: Ethereum: 50; LayerZero/Stargate: 40 max: Ethereum: 100; LayerZero/Stargate: 100; approximate of swap",
+          "schema": {}
+        },
+        {
+          "name": "mainRouteParts",
+          "required": false,
+          "in": "query",
+          "description": "default: Ethereum: 10, LayerZero/Stargate: 10; max: Ethereum: 50, LayerZero/Stargate: 50 approximate of swap",
+          "schema": {}
+        },
+        {
+          "name": "connectorTokens",
+          "required": false,
+          "in": "query",
+          "description": "max: 5; approximate of swap",
+          "allowEmptyValue": true,
+          "schema": {}
+        },
+        {
+          "name": "complexityLevel",
+          "required": false,
+          "in": "query",
+          "description": "min: 0; max: 3; default: 2; approximate of swap",
+          "schema": {}
+        },
+        {
+          "name": "gasLimit",
+          "required": false,
+          "in": "query",
+          "description": "",
+          "schema": {}
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "Swap",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SwapResponseDto"
+              }
+            }
+          }
+        }
+      },
+      "tags": [
+        "Swap"
+      ]
+    }
+  },
+  "/protocols": {
+    "get": {
+      "operationId": "Protocol_getProtocols",
+      "parameters": [],
+      "responses": {
+        "200": {
+          "description": "All supported protocols",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProtocolsResponseDto"
+              }
+            }
+          }
+        }
+      },
+      "tags": [
+        "Protocols"
+      ]
+    }
+  },
+  "/protocols/images": {
+    "get": {
+      "operationId": "Protocol_getActiveProtocols",
+      "parameters": [],
+      "responses": {
+        "200": {
+          "description": "All supported protocols public",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FullyQualifiedProtocolssResponseDto"
+              }
+            }
+          }
+        }
+      },
+      "tags": [
+        "Protocols"
+      ]
+    }
+  },
+  "/tokens": {
+    "get": {
+      "operationId": "ActiveMarketsList_getTokens",
+      "parameters": [],
+      "responses": {
+        "200": {
+          "description": "Sushiswap Tokenlists",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TokensResponseDto"
+              }
+            }
+          }
+        }
+      },
+      "tags": [
+        "Tokens"
+      ]
+    }
+  },
+  "/presets": {
+    "get": {
+      "operationId": "ChainAccessList_getPresets",
+      "parameters": [],
+      "responses": {
+        "200": {
+          "description": ""
+        }
+      }
+    }
+  }
+}

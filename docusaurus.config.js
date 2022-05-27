@@ -32,7 +32,7 @@ const config = {
         // Plugin Options for loading OpenAPI files
         specs: [
           {
-            spec: 'openapi.json',
+            spec: 'output.swagger.json',
             route: '/api/',
           },
         ],

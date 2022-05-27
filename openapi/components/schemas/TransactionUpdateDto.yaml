@@ -5,7 +5,7 @@ properties:
     example: confirmed
   ethTxHash:
     type: string
-    example: '0xf5dbaf357e09abf2d4151974bdfae5e20317043b155ff653b03fbd137c940a84'
+    example: '0xafda5e4205b21292df4faa6a70e989a05438d67c8890b35c5d0c765c4a4ad734'
   message:
     type: string
     example: Unhandled rejection

@@ -1,0 +1,11 @@
+{
+  "inputs": [
+    {
+      "inputFile": "./gateway.json"
+    },
+    {
+        "inputFile": "./api.json"
+      }
+  ], 
+  "output": "./output.swagger.json"
+}

@@ -6,7 +6,7 @@ properties:
     example: '2020-10-16T20:48:18.476Z'
   address:
     type: string
-    example: '0x9d82a6c981114943bd42b9e339361afb82b50596'
+    example: '0x000000618E8ea9DcA789ba7978fE67CdD76Efaf0'
   type:
     type: string
     example: deposit
@@ -15,21 +15,21 @@ properties:
     example: pending
   transfer:
     $ref: ./TransferDto.yaml
-  filAddress:
+  namespace:
     type: string
-    example: t1cfxqaivmpcv2rxdd2ew75u5duyabpkri2f6lddy
+    example: relay.bond
   amount:
     type: number
     example: '0.01'
   ethTxHash:
     type: string
-    example: '0xf5dbaf357e09abf2d4151974bdfae5e20317043b155ff653b03fbd137c940a84'
+    example: '0xafda5e4205b21292df4faa6a70e989a05438d67c8890b35c5d0c765c4a4ad734'
 required:
   - createdAt
   - address
   - type
   - status
   - transfer
-  - filAddress
+  - namespace
   - amount
   - ethTxHash

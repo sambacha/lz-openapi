@@ -1,0 +1,15 @@
+files:
+  - path: dist.yaml
+    id: Gateway-LayerZero-API
+  - path: generator/api.json
+    id: Gateway-LayerZero-API-1
+  - path: generator/base.api.json
+    id: Gateway-LayerZero-API-2
+  - path: generator/gateway.json
+    id: Gateway-LayerZero-API-3
+  - path: openapi/openapi.yaml
+    id: Gateway-LayerZero-API-4
+  - path: output.swagger.json
+    id: Gateway-LayerZero-API-5
+ruleset:
+  - breaking-changes

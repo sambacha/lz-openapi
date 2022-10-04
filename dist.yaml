@@ -2,10 +2,17 @@ openapi: 3.0.0
 info:
   title: Gateway LayerZero API
   description: Tannhauser Gateway LayerZero API
-  version: 1.0.0
+  version: 1.0.1
   contact: {}
 tags: []
 servers: []
+schemes:
+  - https
+basePath: /api
+consumes:
+  - application/json
+produces:
+  - application/json
 components:
   securitySchemes:
     bearer:
@@ -145,6 +152,196 @@ components:
           example: 42
       required:
         - counter
+definitions:
+ EthereumTx:
+    required:
+      - txHash
+      - to
+      - data
+      - gas
+      - gasPrice
+      - nonce
+      - value
+      - from
+    type: object
+    properties:
+      txHash:
+        title: Tx hash
+        type: string
+      to:
+        title: To
+        type: string
+        x-nullable: true
+      data:
+        title: Data
+        type: string
+      blockNumber:
+        title: Block number
+        type: string
+        readOnly: true
+      blockTimestamp:
+        title: Block timestamp
+        type: string
+        readOnly: true
+      created:
+        title: Created
+        type: string
+        format: date-time
+        readOnly: true
+      modified:
+        title: Modified
+        type: string
+        format: date-time
+        readOnly: true
+      gasUsed:
+        title: Gas used
+        type: string
+        format: decimal
+        x-nullable: true
+      status:
+        title: Status
+        type: integer
+        maximum: 2147483647
+        minimum: -2147483648
+        x-nullable: true
+      transactionIndex:
+        title: Transaction index
+        type: integer
+        maximum: 2147483647
+        minimum: 0
+        x-nullable: true
+      gas:
+        title: Gas
+        type: string
+        format: decimal
+      gasPrice:
+        title: Gas price
+        type: string
+        format: decimal
+      nonce:
+        title: Nonce
+        type: string
+        format: decimal
+      value:
+        title: Value
+        type: string
+        format: decimal
+      from:
+        title: From
+        type: string
+ ERC20:
+    required:
+      - ethereumTx
+      - logIndex
+      - tokenAddress
+      - to
+      - value
+      - from
+    type: object
+    properties:
+      id:
+        title: ID
+        type: integer
+        readOnly: true
+      ethereumTx:
+        $ref: '#/definitions/EthereumTx'
+      logIndex:
+        title: Log index
+        type: integer
+        minimum: 0
+      tokenAddress:
+        title: Token address
+        type: string
+      to:
+        title: To
+        type: string
+      value:
+        title: Value
+        type: string
+        minLength: 1
+      from:
+        title: From
+        type: string
+ ERC721:
+    required:
+      - ethereumTx
+      - logIndex
+      - tokenAddress
+      - to
+      - tokenId
+      - from
+    type: object
+    properties:
+      id:
+        title: ID
+        type: integer
+        readOnly: true
+      ethereumTx:
+        $ref: '#/definitions/EthereumTx'
+      logIndex:
+        title: Log index
+        type: integer
+        minimum: 0
+      tokenAddress:
+        title: Token address
+        type: string
+      to:
+        title: To
+        type: string
+      tokenId:
+        title: Token id
+        type: string
+        minLength: 1
+      from:
+        title: From
+        type: string
+ Token:
+    required:
+      - address
+      - name
+      - symbol
+      - decimals
+    type: object
+    properties:
+      address:
+        title: Address
+        type: string
+        maxLength: 42
+        minLength: 1
+      logoUri:
+        title: Logo uri
+        type: string
+        readOnly: true
+      default:
+        title: Default
+        type: string
+        readOnly: true
+      name:
+        title: Name
+        type: string
+        maxLength: 60
+        minLength: 1
+      symbol:
+        title: Symbol
+        type: string
+        maxLength: 60
+        minLength: 1
+      description:
+        title: Description
+        type: string
+      decimals:
+        title: Decimals
+        type: integer
+        maximum: 32767
+        minimum: 0
+      websiteUri:
+        title: Website uri
+        type: string
+        format: uri
+        maxLength: 200
+      gas:
+        title: Gas
+        type: boolean
 paths:
   /auth/login:
     post:
